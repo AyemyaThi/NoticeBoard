@@ -1,9 +1,9 @@
 <?php define('BASEPATH', "localhost");
 require_once("autoload.php");
 
-$contact_m = new ContactModel();
+$note_m = new noteModel();
 
-$contacts  = $contact_m->getRows();
+$notes  = $note_m->getRows();
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -42,8 +42,8 @@ $contacts  = $contact_m->getRows();
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="note.php">Note List</a></li>
+        <li><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="note.php">Note List</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -63,40 +63,36 @@ $contacts  = $contact_m->getRows();
 
 <div class="container">
 
-<a href="create.php" class="btn btn-primary pull-right">Add New</a>
+<a href="create_note.php" class="btn btn-primary pull-right">Add New</a>
 
 	<table class="table table-striped">
 		<thead>
 		<tr>
 			<th>Id</th>
-			<th>Name</th>
-			<th>Phone</th>
-			<th>Email</th>
-			<th>Address</th>
-			<th>Photo</th>
+			<th>Title</th>
+			<th>Description</th>
+			<th>Attachment</th>
 			<th>Actions</th>
 		</tr>
 		</thead>
 
 		<tbody>
 
-<?php if(is_array($contacts) && count($contacts)>0): ?>
+<?php if(is_array($notes) && count($notes)>0): ?>
 
-  <?php foreach($contacts as $contact): ?>
+  <?php foreach($notes as $note): ?>
 		<tr>
-			<td><?php echo $contact['id']; ?></td>
-			<td><?php echo $contact['name']; ?></td>
-			<td><?php echo $contact['phone']; ?></td>
-			<td><?php echo $contact['email']; ?></td>
-			<td><?php echo $contact['address']; ?></td>
+			<td><?php echo $note['id']; ?></td>
+			<td><?php echo $note['title']; ?></td>
+			<td><?php echo $note['description']; ?></td>
 			<td>
-          <?php if(!empty($contact['photo'])): ?>
-           <img src="uploads/<?php echo $contact['photo']; ?>"  style="height:150px;" class="thumbnail" />
+          <?php if(!empty($note['attachment'])): ?>
+           <img src="uploads/<?php echo $note['attachment']; ?>"  style="height:150px;" class="thumbnail" />
           <?php endif; ?>
       </td>
 			<td>
-        <a href="edit.php?id=<?php echo $contact['id']; ?>" class="btn btn-info btn-xs">Edit</a>   
-        <a href="delete.php?id=<?php echo $contact['id']; ?>" class="btn btn-danger btn-xs">Delete</a>   
+        <a href="edit_note.php?id=<?php echo $note['id']; ?>" class="btn btn-info btn-xs">Edit</a>   
+        <a href="delete_note.php?id=<?php echo $note['id']; ?>" class="btn btn-danger btn-xs">Delete</a>   
       </td>
 		</tr>
 
